@@ -1,0 +1,51 @@
+1. Visão Geral do Projeto
+O projeto consiste em uma aplicação web para consulta de cotações de moedas e criptomoedas em tempo real, utilizando a integração com a AwesomeAPI. O sistema permite que o usuário pesquise pares dinâmicos (como USD-BRL, EUR-BRL, BTC-BRL) e salve os resultados em um histórico gerido em um banco de dados local.
+
+2. Arquitetura e Tecnologias
+O sistema foi desenvolvido sob a arquitetura cliente-servidor, garantindo a separação de responsabilidades entre interface e regras de negócio:
+
+Front-end: Construído com HTML5 semântico, CSS3 (utilizando Flexbox para layout responsivo) e JavaScript (Vanilla JS) com Fetch API para requisições assíncronas.
+
+Back-end: Desenvolvido em Python 3 com o microframework Flask, estruturado com base nos princípios da Programação Orientada a Objetos (POO).
+
+Banco de Dados: SQLite, gerenciado através do padrão de projeto DAO (Data Access Object) para abstração da camada de persistência.
+
+3. Estrutura do Banco de Dados
+O armazenamento de dados é feito no arquivo SQLite local, através de uma única tabela denominada "cotacoes", contendo a seguinte estrutura lógica:
+
+id: Chave Primária (Inteiro, Autoincremento).
+
+moeda: Código do par de moedas consultado (Texto, Não Nulo).
+
+nome: Descrição extensa do par (Texto, Não Nulo).
+
+valor: Valor monetário da cotação (Real/Decimal, Não Nulo).
+
+variacao: Variação percentual do ativo (Real/Decimal, Não Nulo).
+
+data_consulta: Registro de data e hora da gravação (Datetime, Preenchimento Automático).
+
+4. Organização do Código
+O repositório está organizado em módulos para facilitar a manutenção e escalabilidade:
+
+Camada de Modelo (models.py): Contém a classe Cotacao, responsável por modelar os atributos e métodos da entidade principal, incluindo a serialização para formato de dicionário.
+
+Camada de Persistência (dao.py): Contém a classe CotacaoDAO, que centraliza a conexão com o banco de dados e as operações de inclusão, listagem e exclusão (SQL puro com prepared statements para segurança).
+
+Camada de Controle e Rotas (app.py): Arquivo central do Flask. Configura o servidor, habilita o CORS e expõe as rotas da aplicação, além de intermediar a requisição externa à AwesomeAPI.
+
+Camada de Apresentação (pasta frontend): Centraliza os arquivos estáticos (index.html, style.css, script.js) que constroem a interface e reagem às interações do usuário.
+
+5. Endpoints da API REST (Rotas)
+O servidor local expõe os seguintes serviços para o consumo da interface:
+
+GET /api/cotacao/buscar/: Rota que recebe o par de moedas via URL, realiza a requisição HTTP à AwesomeAPI, trata a resposta e devolve um objeto JSON formatado para o front-end.
+
+POST /api/cotacoes: Recebe o corpo da requisição em JSON e envia os dados para a camada DAO realizar a inserção no banco SQLite.
+
+GET /api/cotacoes: Consulta a camada DAO e retorna um array JSON com todo o histórico de cotações salvas, ordenado de forma decrescente.
+
+DELETE /api/cotacoes/: Recebe um identificador via URL e instrui o banco de dados a remover o registro correspondente.
+
+6. Instruções de Execução
+Para implantar o sistema em ambiente de desenvolvimento, o servidor Python exige a instalação das bibliotecas dependentes (flask, flask-cors e requests). O back-end é iniciado pela execução do arquivo de rotas, que instanciará automaticamente o banco de dados caso não exista e passará a escutar requisições na porta 5000. O front-end é estático e deve ser executado carregando o arquivo HTML principal no navegador, que se conectará automaticamente à API local
