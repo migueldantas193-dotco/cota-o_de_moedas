@@ -1,10 +1,10 @@
 class Cotacao:
-    def __init__(self, id_cotacao, moeda, nome, valor, variacao, data_consulta=None):
+    def __init__(self, id_cotacao=None, moeda=None, nome=None, valor=0.0, variacao=0.0, data_consulta=None):
         self.id = id_cotacao
         self.moeda = moeda
         self.nome = nome
-        self.valor = valor
-        self.variacao = variacao
+        self.valor = float(valor)
+        self.variacao = float(variacao)
         self.data_consulta = data_consulta
 
     def to_dict(self):

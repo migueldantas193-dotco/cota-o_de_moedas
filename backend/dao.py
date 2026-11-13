@@ -24,7 +24,7 @@ class CotacaoDAO:
             """)
             conexao.commit()
 
-    def salvar(self, cotacao: Cotacao):
+    def salvar(self, cotacao: Cotacao) -> int:
         with self._conectar() as conexao:
             cursor = conexao.cursor()
             cursor.execute("""
@@ -34,9 +34,20 @@ class CotacaoDAO:
             conexao.commit()
             return cursor.lastrowid
 
-    def listar_todas(self):
+    def listar_todas(self) -> list:
         with self._conectar() as conexao:
             cursor = conexao.cursor()
-            cursor.execute("SELECT id, moeda, nome, valor, variacao, data_consulta FROM cotacoes ORDER BY id DESC")
+            cursor.execute("""
+                SELECT id, moeda, nome, valor, variacao, data_consulta 
+                FROM cotacoes 
+                ORDER BY id DESC
+            """)
             linhas = cursor.fetchall()
             return [Cotacao(*linha) for linha in linhas]
+
+    def excluir(self, id_cotacao: int) -> bool:
+        with self._conectar() as conexao:
+            cursor = conexao.cursor()
+            cursor.execute("DELETE FROM cotacoes WHERE id = ?", (id_cotacao,))
+            conexao.commit()
+            return cursor.rowcount > 0
