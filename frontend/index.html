@@ -10,11 +10,10 @@
 <body>
     <header>
         <h1>Cotações & Criptomoedas</h1>
-        <p>Consulte a cotação em tempo real e salve no seu histórico</p>
+        <p>Consulte a cotação em tempo real e salve no seu histórico local</p>
     </header>
 
     <main class="container">
-        <!-- Seção de Busca -->
         <section class="card-busca">
             <h2>Buscar Cotação (Par Dinâmico)</h2>
             <div class="input-group">
@@ -32,7 +31,6 @@
             <div id="loading" class="hidden">Carregando cotação...</div>
         </section>
 
-        <!-- Seção do Histórico (Banco de Dados) -->
         <section class="card-historico">
             <h2>Histórico de Cotações Salvas</h2>
             <button id="btnAtualizarHistorico" class="btn-secundario">Atualizar Lista</button>
@@ -41,7 +39,6 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Moeda</th>
                             <th>Nome</th>
                             <th>Valor (R$)</th>
@@ -51,7 +48,6 @@
                         </tr>
                     </thead>
                     <tbody id="tabelaHistorico">
-                        <!-- Conteúdo gerado via JS -->
                     </tbody>
                 </table>
             </div>
@@ -59,7 +55,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 - Projeto DWS + POO | UNASP</p>
+        <p>&copy; 2026 - Projeto DWS (Versão GitHub Pages)</p>
     </footer>
 </body>
 </html>
