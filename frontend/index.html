@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Cotações - AwesomeAPI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Cotações & Criptomoedas</h1>
+        <p>Consulte a cotação em tempo real e salve no seu histórico</p>
+    </header>
+
+    <main class="container">
+        <!-- Seção de Busca -->
+        <section class="card-busca">
+            <h2>Buscar Cotação (Par Dinâmico)</h2>
+            <div class="input-group">
+                <input type="text" id="parInput" placeholder="Ex: USD-BRL, EUR-BRL, BTC-BRL" value="USD-BRL">
+                <button id="btnBuscar">Buscar</button>
+            </div>
+            
+            <div id="resultadoBusca" class="resultado-container hidden">
+                <h3 id="nomeMoeda">-</h3>
+                <p><strong>Par:</strong> <span id="parMoeda">-</span></p>
+                <p><strong>Valor Atual:</strong> R$ <span id="valorMoeda">0.00</span></p>
+                <p><strong>Variação:</strong> <span id="variacaoMoeda">0%</span></p>
+                <button id="btnSalvar" class="btn-salvar">Salvar no Histórico</button>
+            </div>
+            <div id="loading" class="hidden">Carregando cotação...</div>
+        </section>
+
+        <!-- Seção do Histórico (Banco de Dados) -->
+        <section class="card-historico">
+            <h2>Histórico de Cotações Salvas</h2>
+            <button id="btnAtualizarHistorico" class="btn-secundario">Atualizar Lista</button>
+            
+            <div class="tabela-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Moeda</th>
+                            <th>Nome</th>
+                            <th>Valor (R$)</th>
+                            <th>Variação</th>
+                            <th>Data/Hora</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaHistorico">
+                        <!-- Conteúdo gerado via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Projeto DWS + POO | UNASP</p>
+    </footer>
+</body>
+</html>
